@@ -61,8 +61,10 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 Vue.use(VueAxios, axios);
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 
 Vue.config.productionTip = false;
 

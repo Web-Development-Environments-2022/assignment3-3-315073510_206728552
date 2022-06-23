@@ -39,7 +39,7 @@ export default {
     }
   },
   created(){
-    api.getRandomRecipes().then(r=>this.randomRecipes=r)  
+    api.getRandomRecipes(3).then(r=>this.randomRecipes=r)  
     },
     methods: { }
 
