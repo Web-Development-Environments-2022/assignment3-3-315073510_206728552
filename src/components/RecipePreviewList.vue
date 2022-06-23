@@ -23,29 +23,19 @@ export default {
     title: {
       type: String,
       required: true
-    }
+    },
+    recipes:[]
   },
   data() {
     return {
-      recipes: []
+     
     };
   },
   mounted() {
-    this.updateRecipes();
+  
   },
   methods: {
-    async updateRecipes() {
-      try {
-        const response = await this.axios.get(
-           "http://localhost/recipes/randomRecipes?quantity=3",
-        );
-
-        this.recipes=response.data
-
-      } catch (error) {
-        console.log(error);
-      }
-    }
+   
   }
 };
 </script>
