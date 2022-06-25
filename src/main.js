@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
-
+// axios.defaults.withCredentials=true
 import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
@@ -11,6 +11,7 @@ const router = new VueRouter({
 });
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
+
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -73,6 +74,7 @@ const shared_data = {
   username: localStorage.username,
   login(username) {
     localStorage.setItem("username", username);
+    // Vue.$cookie.set("username", '5')
     this.username = username;
     console.log("login", this.username);
   },
