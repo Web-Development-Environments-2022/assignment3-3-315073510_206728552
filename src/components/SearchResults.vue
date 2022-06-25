@@ -13,20 +13,10 @@ export default {
     RecipePreviewList
   },
   props: {
-    //recipesToShow: Array
+    recipesToShow: Array
   },
   data(){
     return {
-        recipesToShow:[{
-                          "id": 661340,
-                          "title": "Spinach Salad with Strawberry Vinaigrette",
-                          "image": "https://spoonacular.com/recipeImages/661340-556x370.jpg",
-                          "readyInMinutes": 45,
-                          "popularity": 15,
-                          "vegan": false,
-                          "vegetarian": false,
-                          "glutenFree": true
-                      }]
     }
   },
   created(){

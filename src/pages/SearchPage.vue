@@ -192,15 +192,16 @@
           { value: 15, text: '15' },
         ],
 
-        recipesToShow: []
-      }
-    },
-    methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        console.log("!!!!")
-        alert(JSON.stringify(this.form))
-        recipesToShow = [{
+        recipesToShow: [{
+                          "id": 661340,
+                          "title": "Spinach Salad with Strawberry Vinaigrette",
+                          "image": "https://spoonacular.com/recipeImages/661340-556x370.jpg",
+                          "readyInMinutes": 45,
+                          "popularity": 15,
+                          "vegan": false,
+                          "vegetarian": false,
+                          "glutenFree": true
+                      }, {
                           "id": 661340,
                           "title": "Spinach Salad with Strawberry Vinaigrette",
                           "image": "https://spoonacular.com/recipeImages/661340-556x370.jpg",
@@ -210,6 +211,13 @@
                           "vegetarian": false,
                           "glutenFree": true
                       }]
+      }
+    },
+    methods: {
+      onSubmit(event) {
+        event.preventDefault()
+        console.log("!!!!")
+        alert(JSON.stringify(this.form))
       },
       onReset(event) {
         //event.preventDefault()
