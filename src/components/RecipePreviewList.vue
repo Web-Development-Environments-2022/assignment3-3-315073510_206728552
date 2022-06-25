@@ -1,11 +1,11 @@
 <template>
   <b-container class="container">
-    <span id="title">
+    <div id="title">
       {{ title }}
-    </span>
+    </div>
     <div id="recipe-div">
       <div class="recipe"  v-for="r in recipes" :key="r.id">
-        <RecipePreview  :recipe="r" />
+        <RecipePreview  :recipe="r" :isWatched="true" />
       </div>
     </div>
   </b-container>
@@ -42,12 +42,12 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
+  width: 530px;
 
 }
 .recipe{
   margin-top: 20px;
-  width: 260px;
-  
+
 }
 #title{
   font-size:18px;
@@ -56,7 +56,7 @@ export default {
  display: flex;
  justify-content: center;
   height: fit-content;
-  width: 250px;
+
 }
 
 

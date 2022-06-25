@@ -98,13 +98,15 @@ export default {
             username: this.form.username,
             password: this.form.password
           }
+      // const res = await this.axios.post(
+      //   `http://localhost/login`,body
+      // );
        const res=await api.login(body)
        this.$root.store.login(this.form.username);
-        this.$cookie.set("5", this.form.username)
+      
         this.$router.push("/");
       } catch (err) {
-        console.log(err.response);
-        this.form.submitError = err.response.data.message;
+        console.log(err);
       }
     },
     onLogin() {

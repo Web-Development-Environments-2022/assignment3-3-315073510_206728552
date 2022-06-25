@@ -1,108 +1,104 @@
 <template>
-  <div class="container">
+  <div class="container all card">
     <div v-if="recipe">
       <div class="recipe-header mt-3 mb-4">
-        <h1>{{ recipe.title }}</h1>
-        <img :src="recipe.image" class="center" />
+     
+        <img :src="recipe.image" class="img"  />
+        <div id="header-details">
+          <h1 id="title">{{ recipe.title }}</h1>
+          <RecipeCategoryGrid :isWatched="isWatched" :recipe="recipe"></RecipeCategoryGrid>
+          
+          <div class="quant-txt">Ready in : <span class="quantity">{{ recipe.readyInMinutes }} minutes</span></div>
+          <div class="quant-txt">Likes : <span class="quantity">{{ recipe.aggregateLikes }} likes</span></div>
+        </div>
+        <FavoritButton class="favBtn" :size="20" :isFavorit="isFavorit" :recipe="recipe"></FavoritButton>
+        
       </div>
-      <div class="recipe-body">
-        <div class="wrapper">
-          <div class="wrapped">
-            <div class="mb-3">
-              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+      <b-row  class="recipe-body">
+         <b-col>
+          <span class="i-title">Instructions</span>
+            
+            <div>
+              <div class="small-card" v-for="s in recipe._instructions" :key="s.number">
+                {{ s.step }}
+              </div>
             </div>
-            Ingredients:
-            <ul>
-              <li
-                v-for="(r, index) in recipe.extendedIngredients"
+        </b-col>
+        <b-col >
+          <span class="i-title" > Ingredients </span>
+            
+            <div >
+          
+              <div 
+                v-for="(r, index) in recipe.extendedIngredients" class="small-card" 
                 :key="index + '_' + r.id"
               >
                 {{ r.original }}
-              </li>
-            </ul>
-          </div>
-          <div class="wrapped">
-            Instructions:
-            <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
+              </div>
+            </div>
+        </b-col>
+       
+      </b-row>
+      
     </div>
   </div>
 </template>
 
 <script>
+import api from '../services/api'
+import RecipeCategoryGrid from '../components/RecipeCategoryGrid.vue';
+import FavoritButton from '../components/FavoritButton.vue';
 export default {
-  data() {
-    return {
-      recipe: null
-    };
-  },
-  async created() {
-    try {
-      let response;
-      // response = this.$route.params.response;
-
-      try {
-        response = await this.axios.get(
-          // "https://test-for-3-2.herokuapp.com/recipes/info",
-          this.$root.store.server_domain + "/recipes/info",
-          {
-            params: { id: this.$route.params.recipeId }
-          }
-        );
-
-        // console.log("response.status", response.status);
-        if (response.status !== 200) this.$router.replace("/NotFound");
-      } catch (error) {
-        console.log("error.response.status", error.response.status);
-        this.$router.replace("/NotFound");
-        return;
-      }
-
-      let {
-        analyzedInstructions,
-        instructions,
-        extendedIngredients,
-        aggregateLikes,
-        readyInMinutes,
-        image,
-        title
-      } = response.data.recipe;
-
-      let _instructions = analyzedInstructions
-        .map((fstep) => {
-          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-          return fstep.steps;
-        })
-        .reduce((a, b) => [...a, ...b], []);
-
-      let _recipe = {
-        instructions,
-        _instructions,
-        analyzedInstructions,
-        extendedIngredients,
-        aggregateLikes,
-        readyInMinutes,
-        image,
-        title
-      };
-
-      this.recipe = _recipe;
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    data() {
+        return {
+            recipe: null,
+            isFavorit:false,
+            isWatched:true
+        };
+    },
+    async created() {
+        try {
+            let response;
+            let rid = this.$route.params.recipeId;
+            try {
+                response = await api.getRecipe(rid);
+                console.log("response.status", response.status);
+                if (response.status !== 200)
+                    this.$router.replace("/NotFound");
+            }
+            catch (error) {
+                console.log("error.response.status", error.response.status);
+                this.$router.replace("/NotFound");
+                return;
+            }
+            let { id,analyzedInstructions, instructions, extendedIngredients, aggregateLikes, readyInMinutes, image, title, vegan, vegetarian, glutenFree, } = response.data;
+            let _instructions = analyzedInstructions
+                .map((fstep) => {
+                fstep.steps[0].step = fstep.name + fstep.steps[0].step;
+                return fstep.steps;
+            })
+                .reduce((a, b) => [...a, ...b], []);
+            let _recipe = {
+              id,
+                instructions,
+                _instructions,
+                analyzedInstructions,
+                extendedIngredients,
+                aggregateLikes,
+                readyInMinutes,
+                image,
+                title,
+                vegan,
+                vegetarian,
+                glutenFree,
+            };
+            this.recipe = _recipe;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    },
+    components: { RecipeCategoryGrid, FavoritButton }
 };
 </script>
 
@@ -119,7 +115,59 @@ export default {
   margin-right: auto;
   width: 50%;
 }
-/* .recipe-header{
+.flex-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.img{
+  width: 20rem;
+  height: 15rem;
+  border-radius: 20px;
+}
+.recipe-header{
+  display: flex;
 
-} */
+  
+}
+
+#header-details{
+  margin-left: 20px;
+}
+.favBtn{
+  position: relative;
+  margin-right: 20px;
+  margin-left: 30px;
+   margin-top: 10px;
+  
+}
+.i-title{
+  font-size: 18px;
+}
+.all{
+  margin-top: 10px;
+
+}
+.card{
+  box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.061);
+  padding: 20px;
+  border-radius: 20px;
+}
+.small-card{
+  margin-top: 10px;
+    box-shadow: 0px 0px 4px rgba(0, 63, 126, 0.092);
+  padding: 10px;
+  width: 95%;
+  border-radius: 10px;
+}
+.quantity{
+
+  color: rgb(70, 144, 209);
+}
+
+
+.quant-txt{
+  font-size: 14px;
+}
 </style>
