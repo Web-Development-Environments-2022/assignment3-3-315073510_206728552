@@ -121,6 +121,7 @@
 
 <script>
 import countries from "../assets/countries";
+ import api from '../services/api'
 import {
   required,
   minLength,
@@ -131,6 +132,7 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+ 
   name: "Register",
   data() {
     return {
@@ -170,9 +172,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("mounted");
     this.countries.push(...countries);
-    // console.log($v);
   },
   methods: {
     validateState(param) {
@@ -180,6 +180,7 @@ export default {
       return $dirty ? !$error : null;
     },
     async Register() {
+      
       try {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
@@ -193,22 +194,23 @@ export default {
             country: this.form.country,
             password: this.form.password,
             email: this.form.email
-          }
-        );
+          })
+
+        await api.register(body);
         this.$router.push("/login");
-        // console.log(response);
       } catch (err) {
-        console.log(err.response);
-        this.form.submitError = err.response.data.message;
+        console.log(err);
+        // this.form.submitError = err.response.data.message;
       }
     },
     onRegister() {
+                
       // console.log("register method called");
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-      // console.log("register method go");
+
       this.Register();
     },
     onReset() {

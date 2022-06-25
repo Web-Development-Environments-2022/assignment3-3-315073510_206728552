@@ -9,7 +9,8 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -61,8 +62,10 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 Vue.use(VueAxios, axios);
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 
 Vue.config.productionTip = false;
 
