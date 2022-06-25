@@ -4,9 +4,9 @@
 <b-navbar-brand href="#">ReciPacman</b-navbar-brand>  
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="main">Vue Recipes</b-nav-item>
-          <b-nav-item href="search" >Search</b-nav-item>
-          <b-nav-item href="about" >About</b-nav-item>
+          <b-nav-item :to="{ name: 'main' }">Vue Recipes</b-nav-item>
+          <b-nav-item :to="{ name: 'search' }" >Search</b-nav-item>
+          <b-nav-item :to="{ name: 'about' }" >About</b-nav-item>
           <div v-if="!$root.store.username" style="display:flex">
           <b-nav-item :to="{ name: 'register' }" >Register</b-nav-item>
           <b-nav-item :to="{ name: 'login' }" >Login</b-nav-item>
@@ -30,11 +30,11 @@
           <template #button-content>
             <em>Personal</em>
           </template>
-          <b-dropdown-item :to="{ name: 'FavoritRecipes' }">Favorit Recipes</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'favoritRecipes' }">Favorit Recipes</b-dropdown-item>
           <b-dropdown-item :to="{ name: 'myRecipes' }">My Recipes</b-dropdown-item>
-          <b-dropdown-item :to="{ name: 'FamilyRecipes' }">My Family Recipes</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'familyRecipes' }">My Family Recipes</b-dropdown-item>
         </b-nav-item-dropdown>
-      <b-nav-item :to="{ name: 'AddNewRecipe' }" >+ Add New Recipe</b-nav-item>
+      <b-nav-item :to="{ name: 'newRecipe' }" >+ Add New Recipe</b-nav-item>
         <span id="hello" >Hello </span>
             <span id="username" >{{$root.store.username}}</span>
             <b-icon-person-fill id="p-icon"></b-icon-person-fill>

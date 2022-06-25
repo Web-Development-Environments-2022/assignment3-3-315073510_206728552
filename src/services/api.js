@@ -29,5 +29,26 @@ export default class api{
         console.log(error);
       }
     }
+     //===========user=========
+    static async getWatched() {
+      try {
+        const response = await axios.get(
+          `http://localhost/users/watch`,
+        );
+       return response.data
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    static async getMyRecipes() {
+      try {
+        const response = await axios.get(
+          `http://localhost/users/getMyRecepies`,
+        );
+       return response.data
+      } catch (error) {
+        console.log(error);
+      }
+    }
     
 }

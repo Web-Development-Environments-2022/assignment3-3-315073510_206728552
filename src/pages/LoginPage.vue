@@ -99,8 +99,8 @@ export default {
             password: this.form.password
           }
        const res=await api.login(body)
-      //  if(!res.success) throw 'invald login'
        this.$root.store.login(this.form.username);
+        this.$cookie.set("5", this.form.username)
         this.$router.push("/");
       } catch (err) {
         console.log(err.response);
