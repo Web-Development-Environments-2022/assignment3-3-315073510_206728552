@@ -182,14 +182,19 @@ export default {
     async Register() {
       
       try {
-        let body={
+        const response = await this.axios.post(
+          // "https://test-for-3-2.herokuapp.com/user/Register",
+          //this.$root.store.server_domain + "/Register",
+          "http://localhost/Register", //TODO: unhardwire
+
+          {
             username: this.form.username,
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            country: this.form.country,
             password: this.form.password,
-          "firstname":this.form.firstName,
-           "lastname":this.form.lastName,
-           "country":this.form.country,
-            "email":this.form.email
-          }
+            email: this.form.email
+          })
 
         await api.register(body);
         this.$router.push("/login");

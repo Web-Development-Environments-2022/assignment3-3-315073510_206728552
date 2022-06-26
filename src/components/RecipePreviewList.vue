@@ -23,7 +23,7 @@ export default {
       type: String,
       required: true
     },
-    recipes:[]
+    recipes: Array
   },
   data() {
     return {
