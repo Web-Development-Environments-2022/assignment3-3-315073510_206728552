@@ -50,6 +50,17 @@ export default class api{
         console.log(error);
       }
     }
+    static async Watch(rid) {
+      try {
+        const response = await axios.post(
+          `http://localhost/users/watch`,{rid:rid}
+        );
+       return response.data
+     
+      } catch (error) {
+        console.log(error);
+      }
+    }
     static async getMyRecipes() {
       try {
         const response = await axios.get(
@@ -60,10 +71,30 @@ export default class api{
         console.log(error);
       }
     }
-    static async setFavorit() {
+    static async getFavoriteRecipes() {
+        try {
+          const response = await axios.get(
+            `http://localhost/users/favorites`,
+          );
+         return response.data
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      static async setFavorit(body) {
         try {
           const response = await axios.post(
-            `http://localhost/users/favorites`,
+            `http://localhost/users/favorites`,body
+          );
+         return response.data
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      static async addRecipe(body) {
+        try {
+          const response = await axios.put(
+            `http://localhost/recipes/recipe`,body
           );
          return response.data
         } catch (error) {

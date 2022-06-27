@@ -33,7 +33,7 @@ export default {
       lastWatched:[]
     }
   },
-  created(){
+  async created(){
     // api.getRandomRecipes(3).then(recipes=>this.randomRecipes=recipes)
     this.randomRecipes=[
     
@@ -68,7 +68,8 @@ export default {
         "glutenFree": false
     }
 ]  
-    api.getWatched().then(recipes=>this.lastWatched=recipes)  
+    this.lastWatched= await api.getWatched()
+    this.myRecipes=await api.getMyRecipes()
     },
     methods: { 
       newRandoms(){

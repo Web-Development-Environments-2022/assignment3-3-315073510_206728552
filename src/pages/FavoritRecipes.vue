@@ -1,8 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Favorit Recipes </h1>
-      <!-- <RecipePreviewList v-if="recipes.length" :recipes="recipes.filter(r=>)"></RecipePreviewList>
-      <RecipePreviewList v-if="recipes.length" :recipes="recipes.filter(recipes.length/2)"></RecipePreviewList> -->
+      <RecipesGrid :recipes="recipes"></RecipesGrid>
   </div>
 
 </template>
@@ -13,7 +12,7 @@ import RecipePreviewList from '../components/RecipePreviewList.vue'
 export default{
   name:'FavoritRecipes',
   components: {
-    // RecipePreviewList
+    RecipesGrid
 },
   data(){
     return{
@@ -22,8 +21,7 @@ export default{
   
   },
   created(){
-  
-    api.getRandomRecipes(5).then(r=>this.recipes=r)
+    api.getFavoriteRecipes().then(r=>this.recipes=r)
   }
 }
 </script>

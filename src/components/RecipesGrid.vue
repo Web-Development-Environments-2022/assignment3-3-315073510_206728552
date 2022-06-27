@@ -1,30 +1,29 @@
 <template>
 <div class="grid">
-    <b-row class="row" v-for="(group,i) in dividedRecipes" :key="i%numPerRow">
-        <b-col><RecipePreview v-for="(r,j) in group" :key="j"  :recipe="group[j]"></RecipePreview></b-col>
-    </b-row>
+    <RecipePreviewList :recipes="getEvens(recipes)"></RecipePreviewList>
+    <RecipePreviewList :recipes="getOdds(recipes)"></RecipePreviewList>
+    
 </div>
 </template>
 <script>
 import RecipePreview from './RecipePreview.vue'
+import RecipePreviewList from './RecipePreviewList.vue';
 export default {
     name: "RecipesGrid",
     props: {
         recipes: [],
-        
     },
-    data(){
+    data() {
         return {
-            dividedRecipes:[],
-            numPerRow:2,
-        }
+            dividedRecipes: [],
+            numPerRow: 2,
+        };
     },
-    created(){
-        this.dividedRecipes=this.divide()
+    created() {
+        this.dividedRecipes = this.divide();
     },
     methods: {
         divide() {
-   
             let res = [];
             for (let i = 0; i < this.recipes.length; i += this.numPerRow) {
                 let cur = [];
@@ -42,15 +41,34 @@ export default {
                 }
             }
             return res;
+        },
+        getEvens(array){
+            let res=[]
+            for (var i = 0; i < array.length; i++) {
+                if(i%2==0){
+                    res.push(array[i])
+                }
+            }
+            return res
+        },
+        getOdds(array){
+            let res=[]
+            for (var i = 0; i < array.length; i++) {
+                if(i%2!=0){
+                    res.push(array[i])
+                }
+            }
+            return res
         }
+
     },
-    components: { RecipePreview }
+    components: { RecipePreviewList }
 }
 </script>
 <style scoped>
-.row{
-    display: flex;
+.grid{
+     display: flex;
     justify-content: space-around;
+    width: 100%;
 }
-.grid{width: 100%;}
 </style>

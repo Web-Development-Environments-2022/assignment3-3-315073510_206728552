@@ -60,6 +60,10 @@ export default {
         try {
             let response;
             let rid = this.$route.params.recipeId;
+            // this.isWatched=(await api.getWatched()).includes(rid)
+            // if(!this.isWatched){
+            //     console.log(await api.Watch(rid))
+            // }
             try {
                 response = await api.getRecipe(rid);
                 console.log("response.status", response.status);

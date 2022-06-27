@@ -1,6 +1,6 @@
 import Main from "./pages/MainPage";
 import NotFound from "./pages/NotFoundPage";
-
+import api from './services/api'
 const routes = [
   {
     path: "/",
@@ -41,17 +41,19 @@ const routes = [
     path: "/favoritRecipes",
     name: "favoritRecipes",
     component: () => import("./pages/FavoritRecipes"),
+
   },
   {
     path: "/about",
     name: "about",
     component: () => import("./pages/About"),
+    
   },
-  {
-    path: "/newRecipe",
-    name: "newRecipe",
-    component: () => import("./pages/AddNewRecipe"),
-  },
+  // {
+  //   path: "/newRecipe",
+  //   name: "newRecipe",
+  //   component: () => import("./pages/AddNewRecipe"),
+  // },
   {
     path: "*",
     name: "notFound",

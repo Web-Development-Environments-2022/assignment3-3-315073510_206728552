@@ -34,7 +34,7 @@
           <b-dropdown-item :to="{ name: 'myRecipes' }">My Recipes</b-dropdown-item>
           <b-dropdown-item :to="{ name: 'familyRecipes' }">My Family Recipes</b-dropdown-item>
         </b-nav-item-dropdown>
-      <b-nav-item :to="{ name: 'newRecipe' }" >+ Add New Recipe</b-nav-item>
+      <b-nav-item v-b-modal.addRecipe >+ Add New Recipe</b-nav-item>
         <span id="hello" >Hello </span>
             <span id="username" >{{$root.store.username}}</span>
             <b-icon-person-fill id="p-icon"></b-icon-person-fill>
@@ -46,22 +46,49 @@
     </b-navbar>
 
     <router-view />
+     <b-modal v-if="showModal" hide-footer size="xl" id="addRecipe" title="Add Recipe">
+    <NewRecipeForm @close="closeModal"></NewRecipeForm>
+  </b-modal>
   </div>
 </template>
 
 <script>
+import NewRecipeForm from './components/NewRecipeForm.vue';
+import api from './services/api'
 export default {
-  name: "App",
-  methods: {
-    Logout() {
-      this.$root.store.logout();
-      this.$root.toast("Logout", "User logged out successfully", "success");
-
-      this.$router.push("/").catch(() => {
-        this.$forceUpdate();
-      });
-    }
-  }
+    name: "App",
+    data(){
+      return{
+        showModal:true
+      }
+    },
+    methods: {
+        Logout() {
+            this.$root.store.logout();
+            this.$root.toast("Logout", "User logged out successfully", "success");
+            this.$router.push("/").catch(() => {
+                this.$forceUpdate();
+            });
+        },
+        closeModal( ){
+           this.showModal=false
+           setTimeout(() => {
+            this.showModal=true
+           }, 500);
+           
+        },
+        async created(){
+          this.favoritRecipes=await api.getFavoriteRecipes()
+          this.myRecipes=await api.getMyRecipes()
+        },
+        data(){
+          return{
+            myRecipes:[],
+            favoritRecipes:[]
+          }
+        }
+    },
+    components: {  NewRecipeForm }
 };
 </script>
 
@@ -110,5 +137,8 @@ export default {
   position: relative;
   top: 12px;
   margin-left: 10px;
+}
+#addRecipe{
+  width: 100vw;
 }
 </style>
