@@ -217,7 +217,7 @@
       onSubmit(event) {
         event.preventDefault()
         console.log("!!!!")
-        alert(JSON.stringify(this.form))
+        alert(JSON.stringify(this.form.diets))
       },
       onReset(event) {
         //event.preventDefault()
