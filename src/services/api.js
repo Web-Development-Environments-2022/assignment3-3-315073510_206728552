@@ -1,9 +1,42 @@
 import axios from "axios";
-import Vue from "vue";
-import VueAxios from "vue-axios";
-// axios.defaults.withCredentials=true
-Vue.use(VueAxios, axios);
+
+axios.defaults.withCredentials=true
+
 export default class api{
+  static stub_recipes=[
+    
+    {
+        "id": 631868,
+        "title": "4 Ingredient Chicken Pot Pie",
+        "image": "https://spoonacular.com/recipeImages/631868-556x370.jpg",
+        "readyInMinutes": 45,
+        "popularity": 24,
+        "vegan": false,
+        "vegetarian": false,
+        "glutenFree": false
+    },
+    {
+        "id": 658007,
+        "title": "Raw Vegan Chocolate and Raspberry Cake",
+        "image": "https://spoonacular.com/recipeImages/658007-556x370.jpg",
+        "readyInMinutes": 45,
+        "popularity": 76,
+        "vegan": false,
+        "vegetarian": false,
+        "glutenFree": false
+    },
+    {
+        "id": 633251,
+        "title": "Bacalhau Macau",
+        "image": "https://spoonacular.com/recipeImages/633251-556x370.jpg",
+        "readyInMinutes": 45,
+        "popularity": 9,
+        "vegan": false,
+        "vegetarian": false,
+        "glutenFree": false
+    }
+]  
+    
     static api_base='http://localhost'
   //===========auth=========
     static async register(body){
@@ -42,12 +75,13 @@ export default class api{
     static async getWatched() {
       try {
         const response = await axios.get(
-          `http://localhost/users/watch`,
+          `http://localhost/users/watch`,{withCredentials:true}
         );
        return response.data
      
       } catch (error) {
         console.log(error);
+        return []
       }
     }
     static async Watch(rid) {
@@ -69,6 +103,7 @@ export default class api{
        return response.data
       } catch (error) {
         console.log(error);
+        return []
       }
     }
     static async getFavoriteRecipes() {
@@ -79,6 +114,7 @@ export default class api{
          return response.data
         } catch (error) {
           console.log(error);
+          return []
         }
       }
       static async setFavorit(body) {

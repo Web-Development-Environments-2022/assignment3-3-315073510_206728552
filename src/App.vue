@@ -78,13 +78,12 @@ export default {
            
         },
         async created(){
-          this.favoritRecipes=await api.getFavoriteRecipes()
-          this.myRecipes=await api.getMyRecipes()
+          
+
         },
         data(){
           return{
-            myRecipes:[],
-            favoritRecipes:[]
+
           }
         }
     },

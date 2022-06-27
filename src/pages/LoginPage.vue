@@ -96,12 +96,21 @@ export default {
       try {
         let body={
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
+            
           }
       // const res = await this.axios.post(
       //   `http://localhost/login`,body
       // );
-       const res=await api.login(body)
+      console.log('!!!!!!')
+      // let res= fetch(`http://localhost:3000/login`,{
+      //    method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //      body: JSON.stringify(body)
+      // })
+       const res=await this.axios.post(
+          `http://localhost/login`,body
+        );//await api.login(body)
        this.$root.store.login(this.form.username);
       
         this.$router.push("/");

@@ -53,20 +53,25 @@ export default {
         return {
             recipe: null,
             isFavorit:false,
-            isWatched:true
+            
+            
         };
+    },
+    props:{
+      isWatched:Boolean,
     },
     async created() {
         try {
             let response;
             let rid = this.$route.params.recipeId;
-            // this.isWatched=(await api.getWatched()).includes(rid)
-            // if(!this.isWatched){
-            //     console.log(await api.Watch(rid))
-            // }
+            // send wtch indicator to db
+            if(!this.isWatched){
+                console.log(await api.Watch(rid))
+            }
             try {
+                //getting detailed recipe
                 response = await api.getRecipe(rid);
-                console.log("response.status", response.status);
+                //go to not found page if couldnt find the recipe
                 if (response.status !== 200)
                     this.$router.replace("/NotFound");
             }
@@ -75,6 +80,7 @@ export default {
                 this.$router.replace("/NotFound");
                 return;
             }
+            //process the recipe object
             let { id,analyzedInstructions, instructions, extendedIngredients, aggregateLikes, readyInMinutes, image, title, vegan, vegetarian, glutenFree, } = response.data;
             let _instructions = analyzedInstructions
                 .map((fstep) => {

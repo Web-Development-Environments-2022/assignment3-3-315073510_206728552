@@ -1,11 +1,11 @@
 <template>
   <router-link class="small-card flex-row"
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+    :to="{ name: 'recipe', params: { recipeId: recipe.id ,isWatched:isWatched} }"
 
   >
 
 
-      <img v-if="image_load" :src="recipe.image" class="recipe-image" />
+      <img :src="recipe.image" class="recipe-image" />
 
     <div class="recipe-details">
      
@@ -39,17 +39,17 @@
 import RecipeCategoryGrid from './RecipeCategoryGrid.vue';
 import FavoritButton from './FavoritButton.vue';
 export default {
-    mounted() {
-        this.axios.get(this.recipe.image).then((i) => {
-            this.image_load = true;
-        });
-    },
-    data() {
-        return {
-            image_load: false
-        };
+    // mounted() {
+    //     this.axios.get(this.recipe.image).then((i) => {
+    //         this.image_load = true;
+    //     });
+    // },
+    // data() {
+    //     return {
+    //         image_load: false
+    //     };
         
-    },
+    // },
     props: {
         recipe: {
             type: Object,
@@ -93,6 +93,8 @@ text-overflow: ellipsis;
 .recipe-image{
   border-radius: 20px;
   height: 170px;
+  max-width: 250px;
+  
 
 }
 #minuts{

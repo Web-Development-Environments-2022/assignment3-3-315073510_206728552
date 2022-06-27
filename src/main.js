@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
-// axios.defaults.withCredentials=true
+axios.defaults.withCredentials=true
 import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
@@ -68,6 +68,7 @@ axios.interceptors.response.use(
   }
 );
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+// axios.defaults.withCredentials=true
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
