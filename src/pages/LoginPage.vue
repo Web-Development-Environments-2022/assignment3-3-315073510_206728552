@@ -96,8 +96,7 @@ export default {
       try {
         let body={
             username: this.form.username,
-            password: this.form.password,
-            
+            password: this.form.password,         
           }
       // const res = await this.axios.post(
       //   `http://localhost/login`,body

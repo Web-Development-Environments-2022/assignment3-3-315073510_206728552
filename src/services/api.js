@@ -72,6 +72,14 @@ export default class api{
         `http://localhost/recipes/recipe`,{rid:rid,isMyRecipe:isMyRecipe}
       );
     }
+
+    static async searchRecipes(query, numberOfResultsToDisplay, diet, cuisine, intolerances, sort) {
+      console.log(numberOfResultsToDisplay  )
+      return await axios.get(
+        `http://localhost/recipes/searchRecipe?query=${query}&numberOfResultsToDisplay=${numberOfResultsToDisplay}&diet=${diet}&cuisine=${cuisine}&intolerances=${intolerances}&sort=${sort}&browser=chrome`, {withCredentials:true}
+      );
+    }
+    
      //===========user=========
     static async getWatched() {
       try {
