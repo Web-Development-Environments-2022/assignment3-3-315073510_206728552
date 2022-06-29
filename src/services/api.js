@@ -66,9 +66,10 @@ export default class api{
         console.log(error);
       }
     }
-    static async getRecipe(rid) {
+    static async getRecipe(rid,isMyRecipe) {
+      debugger
       return await axios.get(
-        `http://localhost/recipes/recipe?rid=${rid}`,
+        `http://localhost/recipes/recipe`,{rid:rid,isMyRecipe:isMyRecipe}
       );
     }
 
@@ -83,7 +84,7 @@ export default class api{
     static async getWatched() {
       try {
         const response = await axios.get(
-          `http://localhost/users/watch`,{withCredentials:true}
+          `http://localhost/users/watch`,
         );
        return response.data
      

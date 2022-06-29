@@ -59,9 +59,11 @@ export default {
     },
     props:{
       isWatched:Boolean,
+      isMyRecipe:Boolean
     },
     async created() {
         try {
+
             let response;
             let rid = this.$route.params.recipeId;
             // send wtch indicator to db
@@ -70,7 +72,7 @@ export default {
             }
             try {
                 //getting detailed recipe
-                response = await api.getRecipe(rid);
+                response = await api.getRecipe(rid,isMyRecipe);
                 //go to not found page if couldnt find the recipe
                 if (response.status !== 200)
                     this.$router.replace("/NotFound");
