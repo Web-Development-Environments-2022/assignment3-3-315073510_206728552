@@ -44,21 +44,29 @@ export default {
     //         this.image_load = true;
     //     });
     // },
-    // data() {
-    //     return {
-    //         image_load: false
-    //     };
+    data() {
+        return {
+            isWatched:false
+        };
         
-    // },
+    },
     props: {
         recipe: {
             type: Object,
             required: true
         },
-        isWatched: {
-        type: Boolean,
-        required: true
+        favoritRecipes: {
+            type: Object,
+            required: true
         },
+        watchedRecipes: {
+            type: Object,
+            required: true
+        },
+  
+    },
+    mounted(){
+      // if(watchedRecipes.)
     },
     components: { RecipeCategoryGrid, FavoritButton }
 };

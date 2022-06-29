@@ -3,7 +3,7 @@
     {{$cookies.get("username")}}
     <b-row class="main-content">
     <b-col >
-      <RecipePreviewList :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
+      <RecipePreviewList v-if="randomRecipes.length" :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
       <div class="newRandDiv">
         <b-button id="newRandomsBtn" variant="outline-primary" @click="newRandoms">Get New Random Recipes</b-button>
       </div>
@@ -29,15 +29,22 @@ export default {
   },
   data(){
     return {
-    
+     randomRecipes:[],
+      lastWatched:[],
+      favoritRecipes:[],
     }
   },
   props:{
-      randomRecipes:[],
-      lastWatched:[],
-      favoritRecipes:[],
+     
   },
   async created(){
+    //get random recipes
+    api.getRandomRecipes(3).then(recipes=>this.randomRecipes=recipes)
+    // this.randomRecipes=api.stub_recipes
+    //we need to know which recipes the user visited so we can display the watched icon
+    this.lastWatched= await api.getWatched()
+    //we need to know which recipes the user favorits so we can display the filled star icon
+    this.favoritRecipes=await api.getFavoriteRecipes()
     },
     methods: { 
       newRandoms(){

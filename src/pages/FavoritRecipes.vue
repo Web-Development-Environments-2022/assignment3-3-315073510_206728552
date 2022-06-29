@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Favorit Recipes </h1>
-      <RecipesGrid v-if="recipes.length" :recipes="favoritRecipes"></RecipesGrid>
+      <RecipesGrid v-if="recipes.length" :watched="lastWatched" :favorits="favoritRecipes" :recipes="favoritRecipes"></RecipesGrid>
       <div v-else id="spinner-div">
         <b-spinner  label="Spinning"></b-spinner>
       </div>
@@ -19,16 +19,15 @@ export default{
 },
   data(){
     return{
-
+        lastWatched:[],
+      favoritRecipes:[],
     }
   
   },
-  props:{
-      randomRecipes:[],
-      lastWatched:[],
-      favoritRecipes:[],
-  },
+
   created(){
+        api.getWatched().then(r=>this.lastWatched=r)
+     api.getFavoriteRecipes().then(r=>this.favoritRecipes=r)
   }
 }
 </script>

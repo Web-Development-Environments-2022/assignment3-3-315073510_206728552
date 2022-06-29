@@ -4,7 +4,7 @@
 <b-navbar-brand href="#">ReciPacman</b-navbar-brand>  
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item :to="{ name: 'main',params:pageParams }">Vue Recipes</b-nav-item>
+          <b-nav-item :to="{ name: 'main' }">Vue Recipes</b-nav-item>
           <b-nav-item :to="{ name: 'search',params:pageParams }" >Search</b-nav-item>
           <b-nav-item :to="{ name: 'about' }" >About</b-nav-item>
           <div v-if="!$root.store.username" style="display:flex">
@@ -30,9 +30,9 @@
           <template #button-content>
             <em>Personal</em>
           </template>
-          <b-dropdown-item :to="{ name: 'favoritRecipes' ,params:pageParams}">Favorit Recipes</b-dropdown-item>
-          <b-dropdown-item :to="{ name: 'myRecipes' ,params:pageParams}">My Recipes</b-dropdown-item>
-          <b-dropdown-item :to="{ name: 'familyRecipes',params:pageParams }">My Family Recipes</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'favoritRecipes' }">Favorit Recipes</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'myRecipes' }">My Recipes</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'familyRecipes' }">My Family Recipes</b-dropdown-item>
         </b-nav-item-dropdown>
       <b-nav-item v-b-modal.addRecipe >+ Add New Recipe</b-nav-item>
         <span id="hello" >Hello </span>
@@ -60,22 +60,11 @@ export default {
     data(){
       return{
         showModal:true,
-        pageParams:{
-          lastWatched:[],
-           favoritRecipes:[],
-           randomRecipes:[]
-        }
       
       }
     },
    async created(){
-    //get random recipes
-    api.getRandomRecipes(3).then(recipes=>this.pageParams.randomRecipes=recipes)
-    // this.randomRecipes=api.stub_recipes
-    //we need to know which recipes the user visited so we can display the watched icon
-    this.pageParam.lastWatched= await api.getWatched()
-    //we need to know which recipes the user favorits so we can display the filled star icon
-    this.pageParam.favoritRecipes=await api.getFavoriteRecipes()
+
     },
     methods: {
         Logout() {
