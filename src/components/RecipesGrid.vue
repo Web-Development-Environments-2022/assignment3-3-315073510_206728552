@@ -1,7 +1,7 @@
 <template>
 <div class="grid">
-    <RecipePreviewList  v-if="evenRecipes.length" :favoritRecipes="favorits" :watchedRecipes="watchedRecipes"  :recipes="evenRecipes"></RecipePreviewList>
-    <RecipePreviewList v-if="oddRecipes.length" :favoritRecipes="favorits" :watchedRecipes="watchedRecipes"  :recipes="oddRecipes"></RecipePreviewList>
+    <RecipePreviewList  v-if="evenRecipes.length" :favoritRecipes="favorits" :watchedRecipes="watched"  :recipes="evenRecipes"></RecipePreviewList>
+    <RecipePreviewList v-if="oddRecipes.length" :favoritRecipes="favorits" :watchedRecipes="watched"  :recipes="oddRecipes"></RecipePreviewList>
     
 </div>
 </template>

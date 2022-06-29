@@ -67,9 +67,8 @@ export default class api{
       }
     }
     static async getRecipe(rid,isMyRecipe) {
-      debugger
       return await axios.get(
-        `http://localhost/recipes/recipe`,{rid:rid,isMyRecipe:isMyRecipe}
+        `http://localhost/recipes/recipe?rid=${rid}&isMyRecipe=${isMyRecipe}`
       );
     }
 

@@ -20,7 +20,7 @@
             
             <div>
               <div class="small-card" v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
+                {{ isMyRecipe?s:s.step }}
               </div>
             </div>
         </b-col>
@@ -33,7 +33,7 @@
                 v-for="(r, index) in recipe.extendedIngredients" class="small-card" 
                 :key="index + '_' + r.id"
               >
-                {{ r.original }}
+                {{ isMyRecipe?r:r.original }}
               </div>
             </div>
         </b-col>
@@ -53,44 +53,68 @@ export default {
         return {
             recipe: null,
             isFavorit:false,
-            
+            isWatched:Boolean,
+            isMyRecipe:Boolean
             
         };
     },
     props:{
-      isWatched:Boolean,
-      isMyRecipe:Boolean
+      
     },
     async created() {
         try {
 
             let response;
             let rid = this.$route.params.recipeId;
+            this.isWatched = this.$route.query.isWatched=='true';
+            this.isMyRecipe = this.$route.query.isMyRecipe=='true';
             // send wtch indicator to db
-            debugger
+
             if(!this.isWatched){
                 console.log(await api.Watch(rid))
             }
+           
             try {
+         
                 //getting detailed recipe
-                response = await api.getRecipe(rid,isMyRecipe);
+                response = await api.getRecipe(rid,this.isMyRecipe);
+
                 //go to not found page if couldnt find the recipe
                 if (response.status !== 200)
                     this.$router.replace("/NotFound");
             }
             catch (error) {
-                console.log("error.response.status", error.response.status);
+                // console.log("error.response.status", error.response.status);
                 this.$router.replace("/NotFound");
                 return;
             }
             //process the recipe object
-            let { id,analyzedInstructions, instructions, extendedIngredients, aggregateLikes, readyInMinutes, image, title, vegan, vegetarian, glutenFree, } = response.data;
-            let _instructions = analyzedInstructions
-                .map((fstep) => {
-                fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-                return fstep.steps;
-            })
-                .reduce((a, b) => [...a, ...b], []);
+            // let rid,analyzedInstructions, instructions, extendedIngredients, aggregateLikes, readyInMinutes, image, title, vegan, vegetarian, glutenFree }=undefined
+           let _instructions;
+             let { id,analyzedInstructions, instructions, extendedIngredients, aggregateLikes, readyInMinutes, image, title, vegan, vegetarian, glutenFree, } = response.data;
+             if(this.isMyRecipe){
+                  id=id??response.data.rid
+                  _instructions=analyzedInstructions??response.data.instructions
+                  extendedIngredients=response.data.ingredients
+                  aggregateLikes=aggregateLikes??response.data.popularity
+                  vegan=vegan!=0
+                  vegetarian=vegetarian!=0
+                  glutenFree=glutenFree!=0
+             }
+             else{
+                _instructions = analyzedInstructions
+                            .map((fstep) => {
+                            fstep.steps[0].step = fstep.name + fstep.steps[0].step;
+                            return fstep.steps;
+                        })
+                            .reduce((a, b) => [...a, ...b], []);
+             }
+
+      
+               
+            
+              
+            
             let _recipe = {
               id,
                 instructions,
@@ -106,6 +130,8 @@ export default {
                 glutenFree,
             };
             this.recipe = _recipe;
+            
+         
         }
         catch (error) {
             console.log(error);
