@@ -1,7 +1,7 @@
 <template>
 <div class="grid">
-    <RecipePreviewList :recipes="getEvens(recipes)"></RecipePreviewList>
-    <RecipePreviewList :recipes="getOdds(recipes)"></RecipePreviewList>
+    <RecipePreviewList  v-if="evenRecipes.length" :favoritRecipes="favorits" :watchedRecipes="watchedRecipes"  :recipes="evenRecipes"></RecipePreviewList>
+    <RecipePreviewList v-if="oddRecipes.length" :favoritRecipes="favorits" :watchedRecipes="watchedRecipes"  :recipes="oddRecipes"></RecipePreviewList>
     
 </div>
 </template>
@@ -11,7 +11,9 @@ import RecipePreviewList from './RecipePreviewList.vue';
 export default {
     name: "RecipesGrid",
     props: {
-        recipes: Array,
+        recipes: [],
+        watched:[],
+        favorits:[]
     },
     data() {
         return {

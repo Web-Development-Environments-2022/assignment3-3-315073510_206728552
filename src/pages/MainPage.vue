@@ -3,7 +3,7 @@
     {{$cookies.get("username")}}
     <b-row class="main-content">
     <b-col >
-      <RecipePreviewList :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
+      <RecipePreviewList v-if="randomRecipes.length" :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
       <div class="newRandDiv">
         <b-button id="newRandomsBtn" variant="outline-primary" @click="newRandoms">Get New Random Recipes</b-button>
       </div>
@@ -29,10 +29,13 @@ export default {
   },
   data(){
     return {
-      randomRecipes:[],
+     randomRecipes:[],
       lastWatched:[],
       favoritRecipes:[],
     }
+  },
+  props:{
+     
   },
   async created(){
     //get random recipes

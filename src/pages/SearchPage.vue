@@ -259,11 +259,9 @@ export default {
   },
   async created(){
     //we need to know which recipes the user visited so we can display the watched icon
-    this.lastWatched=[]
-    //this.lastWatched= await api.getWatched()
+    this.lastWatched= await api.getWatched()
     //we need to know which recipes the user favorits so we can display the filled star icon
-    this.favoritRecipes=[]
-    //this.favoritRecipes=await api.getFavoriteRecipes()
+    this.favoritRecipes=await api.getFavoriteRecipes()
   },
 
 
