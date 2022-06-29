@@ -1,7 +1,6 @@
 <template>
-  <router-link class="small-card flex-row"
-    :to="{ name: 'recipe', params: { recipeId: recipe.id?recipe.id:recipe.rid ,isWatched:isWatched,isMyRecipe: recipe.id?false:true} }"
-
+  <div class="small-card flex-row"
+    @click="goToDetails"
   >
 
 
@@ -16,7 +15,7 @@
        
       <b-row class="recipe-overview">
         <b-col class="info">
-        <FavoritButton id="fav-btn" :isFavorit="false" :recipe="recipe" :size="16"></FavoritButton>
+        <FavoritButton id="fav-btn" :isFavorit="isFavorit" :recipe="recipe" :size="16"></FavoritButton>
         <span id="fav-txt">Favorite</span>
         
         </b-col>
@@ -32,7 +31,7 @@
       </b-row>
     </div>
 
-  </router-link>
+  </div>
 </template>
 
 <script>
@@ -46,7 +45,8 @@ export default {
     // },
     data() {
         return {
-            isWatched:false
+            isWatched:false,
+            isFavorit:false
         };
         
     },
@@ -65,8 +65,45 @@ export default {
         },
   
     },
-    mounted(){
-      // if(watchedRecipes.)
+     watch: {
+    // whenever question changes, this function will run
+      watchedRecipes(newVal) {
+       let r=JSON.parse(JSON.stringify(this.recipe))
+         let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
+         try{
+          if(arr.includes(r.rid)){
+                  this.isWatched=true
+                }
+         }
+      catch(e){
+        if(arr.includes(r.id)){
+                  this.isWatched=true
+                }
+         }
+      },
+      favoritRecipes(newVal) {
+       let r=JSON.parse(JSON.stringify(this.recipe))
+         let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
+         try{
+          if(arr.includes(r.rid)){
+                  this.isWatched=true
+                }
+         }
+      catch(e){
+        if(arr.includes(r.id)){
+                  this.isWatched=true
+                }
+         }
+      }
+       
+
+        
+      }
+  ,
+    methods:{
+      goToDetails(){
+        this.$router.replace(`/recipe/${this.recipe.id?this.recipe.id:this.recipe.rid}?isWatched=${this.isWatched}&isMyRecipe=${this.recipe.id?false:true}`);
+      }
     },
     components: { RecipeCategoryGrid, FavoritButton }
 };
@@ -132,6 +169,7 @@ text-overflow: ellipsis;
   border-radius: 10px;
   height: 190px;
   width: 530px;
+  cursor: pointer;
 }
 .icon{
   margin-right: 5px;
