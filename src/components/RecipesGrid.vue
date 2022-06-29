@@ -1,12 +1,11 @@
 <template>
 <div class="grid">
-    <RecipePreviewList :recipes="getEvens(recipes)"></RecipePreviewList>
-    <RecipePreviewList :recipes="getOdds(recipes)"></RecipePreviewList>
+    <RecipePreviewList v-if="evenRecipes.length"  :recipes="evenRecipes"></RecipePreviewList>
+    <RecipePreviewList v-if="oddRecipes.length"  :recipes="oddRecipes"></RecipePreviewList>
     
 </div>
 </template>
 <script>
-import RecipePreview from './RecipePreview.vue'
 import RecipePreviewList from './RecipePreviewList.vue';
 export default {
     name: "RecipesGrid",
@@ -15,51 +14,24 @@ export default {
     },
     data() {
         return {
-            dividedRecipes: [],
-            numPerRow: 2,
+            evenRecipes:[],
+            oddRecipes:[]
         };
     },
     created() {
-        this.dividedRecipes = this.divide();
+
+            for (let i = 0; i < this.recipes.length; i++) {
+                if(i%2==0){
+                    this.evenRecipes.push(this.recipes[i])
+                }
+                else{
+                    this. oddRecipes.push(this.recipes[i])
+                }
+            }         
     },
     methods: {
-        divide() {
-            let res = [];
-            for (let i = 0; i < this.recipes.length; i += this.numPerRow) {
-                let cur = [];
-                for (let j = 0; j < this.numPerRow; j++) {
-                    cur.push(this.recipes[i + j]);
-                }
-                res.push(cur);
-                if (this.recipes.length - i < this.numPerRow) {
-                    let cur = [];
-                    for (let k = i; k < this.recipes.length; k++) {
-                        cur.push(this.recipes[k]);
-                    }
-                    res.push(cur);
-                    break;
-                }
-            }
-            return res;
-        },
-        getEvens(array){
-            let res=[]
-            for (var i = 0; i < array.length; i++) {
-                if(i%2==0){
-                    res.push(array[i])
-                }
-            }
-            return res
-        },
-        getOdds(array){
-            let res=[]
-            for (var i = 0; i < array.length; i++) {
-                if(i%2!=0){
-                    res.push(array[i])
-                }
-            }
-            return res
-        }
+
+
 
     },
     components: { RecipePreviewList }

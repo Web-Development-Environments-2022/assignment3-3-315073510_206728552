@@ -28,7 +28,7 @@ export default{
     },
     methods:{
         favorit(){
-            api.setFavorit(this.recipe.id)
+            api.setFavorit({recipeId:this.recipe.id})
             this.isFavorit=true
          
         },

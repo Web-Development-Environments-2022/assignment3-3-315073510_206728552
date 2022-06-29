@@ -3,8 +3,8 @@
     <div id="title">
       {{ title }}
     </div>
-    <div id="recipe-div">
-      <div class="recipe"  v-for="r in recipes" :key="r.id">
+    <div id="recipe-div" >
+      <div  class="recipe"  v-for="r in recipes" :key="r.id">
         <RecipePreview :isWatched=" isContainsRecipe(watchedRecipes,r.id)" :isFavorit="isContainsRecipe(favoritRecipes,r.id)" :recipe="r" />
       </div>
     </div>
@@ -19,27 +19,29 @@ export default {
     RecipePreview
   },
   props: {
-    title: {
-      type: String,
+    title: String,
+    recipes:  {
+      type: Array,
       required: true
     },
-    recipes: Array,
     favoritRecipes:Array,
     watchedRecipes:Array
   },
   data() {
     return {
-     
+
     };
   },
   mounted() {
-  
+
   },
   methods: {
+
    isContainsRecipe(array,rid){
       // array=array?array:[]
       // return true
-      return array.map(r=>r.rid).includes(rid)
+      if (array==undefined) return false
+      return array.map(r=>r.id).includes(rid)
    }
   }
 };

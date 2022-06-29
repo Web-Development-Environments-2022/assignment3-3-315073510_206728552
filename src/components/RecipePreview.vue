@@ -1,6 +1,6 @@
 <template>
   <router-link class="small-card flex-row"
-    :to="{ name: 'recipe', params: { recipeId: recipe.id ,isWatched:isWatched} }"
+    :to="{ name: 'recipe', params: { recipeId: recipe.id?recipe.id:recipe.rid ,isWatched:isWatched,isMyRecipe: recipe.id?false:true} }"
 
   >
 
