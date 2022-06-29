@@ -29,19 +29,15 @@ export default {
   },
   data(){
     return {
+    
+    }
+  },
+  props:{
       randomRecipes:[],
       lastWatched:[],
       favoritRecipes:[],
-    }
   },
   async created(){
-    //get random recipes
-    api.getRandomRecipes(3).then(recipes=>this.randomRecipes=recipes)
-    // this.randomRecipes=api.stub_recipes
-    //we need to know which recipes the user visited so we can display the watched icon
-    this.lastWatched= await api.getWatched()
-    //we need to know which recipes the user favorits so we can display the filled star icon
-    this.favoritRecipes=await api.getFavoriteRecipes()
     },
     methods: { 
       newRandoms(){

@@ -67,6 +67,7 @@ export default {
             let response;
             let rid = this.$route.params.recipeId;
             // send wtch indicator to db
+            debugger
             if(!this.isWatched){
                 console.log(await api.Watch(rid))
             }

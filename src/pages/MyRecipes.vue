@@ -22,6 +22,11 @@ export default{
     }
   
   },
+    props:{
+      randomRecipes:[],
+      lastWatched:[],
+      favoritRecipes:[],
+  },
   created(){
     api.getMyRecipes().then(r=>this.recipes=r)
   }
