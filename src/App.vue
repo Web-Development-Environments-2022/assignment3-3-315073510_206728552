@@ -5,7 +5,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item :to="{ name: 'main' }">Vue Recipes</b-nav-item>
-          <b-nav-item :to="{ name: 'search',params:pageParams }" >Search</b-nav-item>
+          <b-nav-item :to="{ name: 'search' }" >Search</b-nav-item>
           <b-nav-item :to="{ name: 'about' }" >About</b-nav-item>
           <div v-if="!$root.store.username" style="display:flex">
           <b-nav-item :to="{ name: 'register' }" >Register</b-nav-item>

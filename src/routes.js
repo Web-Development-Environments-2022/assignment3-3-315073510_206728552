@@ -55,6 +55,24 @@ const routes = [
   //   component: () => import("./pages/AddNewRecipe"),
   // },
   {
+    path: "/iceCream",
+    name: "Ice Cream Recipe Page",
+    component: () => import("./pages/FamilyRecipes/EasyIceCreamRecipePage"),
+    
+  },
+  {
+    path: "/salmon",
+    name: "Salmon Recipe Page",
+    component: () => import("./pages/FamilyRecipes/PerfectSalmonRecipePage"),
+    
+  },
+  {
+    path: "/suflonim",
+    name: "Suflonim Recipe Page",
+    component: () => import("./pages/FamilyRecipes/SuflonimRecipePage"),
+    
+  },
+  {
     path: "*",
     name: "notFound",
     component: NotFound,

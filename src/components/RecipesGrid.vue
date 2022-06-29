@@ -11,9 +11,9 @@ import RecipePreviewList from './RecipePreviewList.vue';
 export default {
     name: "RecipesGrid",
     props: {
-        recipes: [],
-        watched:[],
-        favorits:[]
+        recipes: Array,
+        watched:Array,
+        favorits:Array
     },
     data() {
         return {
