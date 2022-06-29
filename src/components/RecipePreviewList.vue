@@ -5,7 +5,7 @@
     </div>
     <div id="recipe-div">
       <div class="recipe"  v-for="r in recipes" :key="r.id">
-        <RecipePreview  :recipe="r" :isWatched="true" />
+        <RecipePreview :isWatched=" isContainsRecipe(watchedRecipes,r.rid)" :isFavorit="isContainsRecipe(favoritRecipes,r.rid)" :recipe="r" />
       </div>
     </div>
   </b-container>
@@ -23,7 +23,9 @@ export default {
       type: String,
       required: true
     },
-    recipes: Array
+    recipes: Array,
+    favoritRecipes:Array,
+    watchedRecipes:Array
   },
   data() {
     return {
@@ -34,7 +36,12 @@ export default {
   
   },
   methods: {
-   
+   isContainsRecipe(array,rid){
+      // array=array?array:[]
+      // return true
+      //console.log()
+      return array.map(r=>r.rid).includes(rid)
+   }
   }
 };
 </script>

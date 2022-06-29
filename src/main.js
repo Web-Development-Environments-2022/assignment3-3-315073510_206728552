@@ -68,6 +68,7 @@ axios.interceptors.response.use(
   }
 );
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+// axios.defaults.withCredentials=true
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)

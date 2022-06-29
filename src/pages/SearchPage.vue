@@ -147,19 +147,24 @@
     <br/>
     <hr/>
     <br/>
-    
-    <SearchResults :recipesToShow="recipesToShow"/>
+
+    <h1>Results:</h1>
+    <RecipePreviewList  :recipes="recipesToShow" title=""/>
+
   </div>
 </template>
 
 <script>
+//    <SearchResults :recipesToShow="recipesToShow"/>
+
   import SearchTagsSelector from '../components/SearchTagsSelector.vue';
   import SearchResults from '../components/SearchResults.vue';
+  import RecipePreviewList from '../components/RecipePreviewList.vue';
   import api from '../services/api';
   export default {
     name: "SearchPage",
     components: {
-      SearchResults
+      RecipePreviewList
     },
     props: {
     },
@@ -193,7 +198,7 @@
         ],
 
         recipesToShow: [{
-                          "id": 661340,
+                          "rid": 661340,
                           "title": "Spinach Salad with Strawberry Vinaigrette",
                           "image": "https://spoonacular.com/recipeImages/661340-556x370.jpg",
                           "readyInMinutes": 45,
@@ -202,7 +207,7 @@
                           "vegetarian": false,
                           "glutenFree": true
                       }, {
-                          "id": 661340,
+                          "rid": 661340,
                           "title": "Spinach Salad with Strawberry Vinaigrette",
                           "image": "https://spoonacular.com/recipeImages/661340-556x370.jpg",
                           "readyInMinutes": 45,
@@ -217,8 +222,34 @@
       onSubmit(event) {
         event.preventDefault()
         console.log("!!!!")
-        alert(JSON.stringify(this.form.diets))
+      //   try {
+      //   const res = this.axios.post(
+      //   `http://localhost/login`,body,{withCredentials:true}
+      // );
+      // //  const res=await api.login(body)
+      //  this.$root.store.login(this.form.username);
+      
+      //   this.$router.push("/");
+      // } catch (err) {
+      //   console.log(err);
+      // }
+        //const dietsJson = JSON.stringify(this.form.diets)
+        const dietsPicked = [];
+        const CuisinesPicked = [];
+        const IntolerancesPicked = [];
+
+        for(var i in this.form.diets)
+          dietsPicked.push([this.form.diets[i]]);
+
+        for(var i in this.form.cuisines)
+          CuisinesPicked.push([this.form.cuisines[i]]);
+
+        for(var i in this.form.intolerances)
+          IntolerancesPicked.push([this.form.intolerances[i]]);
+
+        alert(dietsPicked)
       },
+
       onReset(event) {
         //event.preventDefault()
         // Reset our form values
