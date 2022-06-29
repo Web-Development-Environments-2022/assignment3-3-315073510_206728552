@@ -77,6 +77,7 @@ Vue.config.productionTip = false;
 
 const shared_data = {
   username: localStorage.username,
+  last_searched: localStorage.last_searched,
   login(username) {
     localStorage.setItem("username", username);
     // Vue.$cookie.set("username", '5')
@@ -86,7 +87,15 @@ const shared_data = {
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
+    localStorage.removeItem("last_searched");
     this.username = undefined;
+    this.last_searched = undefined;
+  },
+  search(last_searched) {
+    localStorage.setItem("last_searched", last_searched);
+    // Vue.$cookie.set("username", '5')
+    this.last_searched = last_searched;
+    console.log("login", this.username);
   },
 };
 console.log(shared_data);

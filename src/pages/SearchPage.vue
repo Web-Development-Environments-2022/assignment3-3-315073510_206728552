@@ -11,7 +11,13 @@
           required
         ></b-form-input>
       </b-form-group>
-      <p>last search:</p>
+      <div v-if="$root.store.last_searched">
+          <p>last search: {{$root.store.last_searched}}</p>
+      </div>
+      <div v-else>
+          <p>no last searches for this user</p>
+      </div>
+      
 
       <br/>
       <b-row>
@@ -145,7 +151,7 @@
     <br/>
     <hr/>
     <br/>
-    <RecipePreviewList :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="recipesToShow" title="Results:"  />
+    <RecipesGrid :recipes="recipesToShow" title="Results:"  />
 
   </div>
 </template>
@@ -154,11 +160,13 @@
 import SearchTagsSelector from '../components/SearchTagsSelector.vue';
 import SearchResults from '../components/SearchResults.vue';
 import RecipePreviewList from '../components/RecipePreviewList.vue';
+import RecipesGrid from '../components/RecipesGrid.vue';
 import api from '../services/api';
 export default {
   name: "SearchPage",
   components: {
-    RecipePreviewList
+    //RecipePreviewList
+    RecipesGrid
   },
   props: {
   },
@@ -172,6 +180,7 @@ export default {
         selectedSort: 'random',
         selectedNumResults: 5,
       },
+
 
       show: true,
       
@@ -211,6 +220,7 @@ export default {
       for(var i in this.form.intolerances)
         IntolerancesPicked.push([this.form.intolerances[i]]);
 
+      this.$root.store.search(this.form.query);
       
 
       const res = await api.searchRecipes(this.form.query, this.form.selectedNumResults, dietsPicked, CuisinesPicked, IntolerancesPicked, this.form.selectedSort)
@@ -246,7 +256,6 @@ export default {
           this.show = true
         })
       },
-
   },
   async created(){
     //we need to know which recipes the user visited so we can display the watched icon

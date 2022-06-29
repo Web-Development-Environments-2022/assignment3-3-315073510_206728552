@@ -24,8 +24,12 @@ export default {
       type: Array,
       required: true
     },
-    favoritRecipes:Array,
-    watchedRecipes:Array
+    favoritRecipes: {
+      type: Array,
+    },
+    watchedRecipes: {
+      type: Array,
+    }
   },
   data() {
     return {
