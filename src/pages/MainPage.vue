@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     {{$cookies.get("username")}}
-    <b-row class="main-content">
+    <b-row class="main-content" v-if="this.randomRecipes.length && this.lastWatched.length">
+
     <b-col >
-      <RecipePreviewList v-if="randomRecipes.length" :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
+      <RecipePreviewList  :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
       <div class="newRandDiv">
         <b-button id="newRandomsBtn" variant="outline-primary" @click="newRandoms">Get New Random Recipes</b-button>
       </div>
@@ -11,10 +12,13 @@
  
     <b-col>
       <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
-       <RecipePreviewList v-else :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes" :recipes="lastWatched" title="Last watched recipes" />
+       <RecipePreviewList  :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes" :recipes="lastWatched" title="Last watched recipes" />
     </b-col>
-</b-row>
 
+</b-row>
+    <div v-else id="spinner-div">
+        <b-spinner  label="Spinning"></b-spinner>
+    </div>
     
   </div>
 </template>
@@ -34,15 +38,17 @@ export default {
       favoritRecipes:[],
     }
   },
-  props:{
-     
+  computed:{
+     isLoading(){
+      return !this.randomRecipes.length && !this.lastWatched.length
+     }
   },
   async created(){
     //get random recipes
     api.getRandomRecipes(3).then(recipes=>this.randomRecipes=recipes)
     // this.randomRecipes=api.stub_recipes
     //we need to know which recipes the user visited so we can display the watched icon
-    this.lastWatched= await api.getWatched()
+    this.lastWatched= await api.getWatched(3)
     //we need to know which recipes the user favorits so we can display the filled star icon
     this.favoritRecipes=await api.getFavoriteRecipes()
     },
@@ -78,6 +84,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#spinner-div{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
 }
 .main-content{
   margin-top: 5px;

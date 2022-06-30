@@ -80,10 +80,10 @@ export default class api{
     }
     
      //===========user=========
-    static async getWatched() {
+    static async getWatched(q) {
       try {
         const response = await axios.get(
-          `http://localhost/users/watch`,
+          `http://localhost/users/watch?q=${q}`,
         );
        return response.data
      
