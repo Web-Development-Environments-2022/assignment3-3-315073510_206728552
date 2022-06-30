@@ -52,11 +52,11 @@ export default {
     //we need to know which recipes the user favorits so we can display the filled star icon
     this.favoritRecipes=await api.getFavoriteRecipes()
     },
-    methods: { 
-      newRandoms(){
-        api.getRandomRecipes(3).then(r=>this.randomRecipes=r)  
-      }
+  methods: { 
+    newRandoms(){
+      api.getRandomRecipes(3).then(r=>this.randomRecipes=r)  
     }
+  }
 
 };
 </script>

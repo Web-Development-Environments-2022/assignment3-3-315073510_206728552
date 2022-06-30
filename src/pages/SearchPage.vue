@@ -11,7 +11,13 @@
           required
         ></b-form-input>
       </b-form-group>
-      <p>last search:</p>
+      <div v-if="$root.store.last_searched">
+          <p>last search: {{$root.store.last_searched}}</p>
+      </div>
+      <div v-else>
+          <p>no last searches for this user</p>
+      </div>
+      
 
       <br/>
       <b-row>
@@ -145,23 +151,24 @@
     <br/>
     <hr/>
     <br/>
-    <RecipePreviewList :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="recipesToShow" title="Results:"  />
+    <RecipesGrid :recipes="recipesToShow" :watched="lastWatched" :favorits="favoritRecipes" title="Results:"  />
 
   </div>
 </template>
 
 <script>
-import SearchTagsSelector from '../components/SearchTagsSelector.vue';
 import SearchResults from '../components/SearchResults.vue';
-import RecipePreviewList from '../components/RecipePreviewList.vue';
+import RecipesGrid from '../components/RecipesGrid.vue';
 import api from '../services/api';
+
 export default {
   name: "SearchPage",
   components: {
-    RecipePreviewList
+    RecipesGrid
   },
   props: {
   },
+
   data() {
     return {
       form: {
@@ -174,6 +181,9 @@ export default {
       },
 
       show: true,
+      lastWatched: [],
+      favoritRecipes: [],
+      recipesToShow: [],
       
       optionsDiets: ['Gluten Free', 'Ketogenic', 'Vegetarian', 'Lacto-Vegetarian', 'Ovo-Vegetarian', 'Vegan', 'Pescetarian', 'Paleo', 'Primal', 'Low FODMAP', 'Whole30'],
       optionsIntolerances: ['Dairy', 'Egg', 'Gluten', 'Grain', 'Peanut', 'Seafood', 'Sesame', 'Shellfish', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat'],
@@ -190,10 +200,9 @@ export default {
         { value: 10, text: '10' },
         { value: 15, text: '15' },
       ],
-
-      recipesToShow: []
     }
   },
+
   methods: {
     async searchRecipes(event) {
       event.preventDefault()
@@ -211,6 +220,7 @@ export default {
       for(var i in this.form.intolerances)
         IntolerancesPicked.push([this.form.intolerances[i]]);
 
+      this.$root.store.search(this.form.query);
       
 
       const res = await api.searchRecipes(this.form.query, this.form.selectedNumResults, dietsPicked, CuisinesPicked, IntolerancesPicked, this.form.selectedSort)
@@ -246,15 +256,13 @@ export default {
           this.show = true
         })
       },
-
   },
+
   async created(){
     //we need to know which recipes the user visited so we can display the watched icon
-    this.lastWatched=[]
-    //this.lastWatched= await api.getWatched()
+    this.lastWatched= await api.getWatched()
     //we need to know which recipes the user favorits so we can display the filled star icon
-    this.favoritRecipes=[]
-    //this.favoritRecipes=await api.getFavoriteRecipes()
+    this.favoritRecipes=await api.getFavoriteRecipes()
   },
 
 
