@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Favorit Recipes </h1>
-      <RecipesGrid v-if="recipes.length" :watched="lastWatched" :favorits="favoritRecipes" :recipes="favoritRecipes"></RecipesGrid>
+      <RecipesGrid v-if="favoritRecipes.length" :watched="lastWatched" :favorits="favoritRecipes" :recipes="favoritRecipes"></RecipesGrid>
       <div v-else id="spinner-div">
         <b-spinner  label="Spinning"></b-spinner>
       </div>
