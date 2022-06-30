@@ -5,7 +5,6 @@
         <img src="https://myglida.co.il/wp-content/uploads/2018/03/35202020-36-Smores-Ice-Cream-5.jpg" class="img"  />
         <div id="header-details">
           <h1 id="title">Easy Ice Cream</h1>
-          <RecipeCategoryGrid :isWatched="isWatched" :recipe="recipe"></RecipeCategoryGrid>     
           <div class="txt">Usually made by: <span class="more_text">Carmela - Hadar's mom</span></div>
           <div class="txt">On Occasion: <span class="more_text">Every time we want ice cream!</span></div>
           <div class="txt">More about it: <span class="more_text">We like to experiment with different flavours like honey, Oreo, peanut butter and more. just be creative!</span></div>   
@@ -32,7 +31,7 @@
         </b-row>
         <br/>
         <b-col>
-          <span class="i-title">Instructions</span>
+          <span class="i-title">Instructions:</span>
           <div>
             <div class="small-card">Mix the cream in a mixer</div>
             <div class="small-card">Add condensed milk and mix a little bit</div>

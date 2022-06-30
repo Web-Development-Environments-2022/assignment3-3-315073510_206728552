@@ -2,43 +2,63 @@
   <div class="container all myCard">
     <div>
       <div class="recipe-header mt-3 mb-4">
-        <img src="https://myglida.co.il/wp-content/uploads/2018/03/35202020-36-Smores-Ice-Cream-5.jpg" class="img"  />
+        <img src="https://img.jamieoliver.com/home/wp-content/uploads/2017/11/fondant630x420.jpg" class="img"  />
         <div id="header-details">
-          <h1 id="title">Perfect Salmon</h1>
-          <RecipeCategoryGrid :isWatched="isWatched" :recipe="recipe"></RecipeCategoryGrid>     
+          <h1 id="title">Suflonim</h1>
           <div class="txt">Usually made by: <span class="more_text">Hadar</span></div>
-          <div class="txt">On Occasion: <span class="more_text">Friday dinners</span></div>
-          <div class="txt">More about it: <span class="more_text">It's called perfect because it always gets out of the oven with the perfect smell, taste and texture</span></div>   
+          <div class="txt">On Occasion: <span class="more_text">Whenever we need easy desert</span></div>
+          <div class="txt">More about it: <span class="more_text">Very easy and quick chocolate fondants, we call them "Suflpnim" because it's like mini suoffle!</span></div>   
         </div>        
       </div>
       <div>        
         <span class="i-title" > Ingredients: </span> 
         <b-row class="justify-content-md-center">
-          <b-col><FamilyRecipeIngredient 
-            title="Condensed Milk"
-            image="https://d3m9l0v76dty0.cloudfront.net/system/photos/7603679/large/9a728259444540062b3e7018b68a6977.jpg"
-            amount="1 can"
-          /></b-col>
-          <b-col><FamilyRecipeIngredient 
-            title="Whipping Cream"
-            image="https://www.tnuva.co.il/uploads/f_5dd168e7bcf4b_1574004967.jpg"
-            amount="500 ml"
-          /></b-col>
-          <b-col><FamilyRecipeIngredient 
-            title="Espresso"
-            image="https://www.nespresso.com/il/en/media/catalog/product/2/8/284-26_483x350.png"
-            amount="1 small glass"
-          /></b-col>
+            <b-col><FamilyRecipeIngredient 
+                title="Dark Chocolate"
+                image="https://m.pricez.co.il/ProductPictures/7290000178134.jpg"
+                amount="200 gr"
+            /></b-col>
+            <b-col><FamilyRecipeIngredient 
+                title="White sugar"
+                image="https://d3m9l0v76dty0.cloudfront.net/system/photos/3069462/large/3c62846b6705c61e1f0add31813e26a1.jpg"
+                amount="1/2 cup"
+            /></b-col>
+            <b-col><FamilyRecipeIngredient 
+                title="Flour"
+                image="https://m.pricez.co.il/ProductPictures/7290003107216.jpg"
+                amount="1/4 cup"
+            /></b-col>
+        </b-row>
+        <br/>
+        <b-row class="justify-content-md-center">
+            <b-col><FamilyRecipeIngredient 
+                title="Butter"
+                image="https://d3m9l0v76dty0.cloudfront.net/system/photos/4084584/large/97ea0c1852f7d6ca3bcdf08abbfc8fa1.jpg"
+                amount="150 gr"
+            /></b-col>
+            <b-col><FamilyRecipeIngredient 
+                title="Eggs"
+                image="https://market50.b-cdn.net/shemesh/products/30-%D7%91%D7%99%D7%A6%D7%99%D7%9D-L-479114158.jpg"
+                amount="2 units"
+            /></b-col>
+            <b-col><FamilyRecipeIngredient 
+                title="Egg yolks"
+                image="https://media.istockphoto.com/photos/broken-double-yolk-egg-picture-id637331752?k=20&m=637331752&s=612x612&w=0&h=QUKj-zskxoSM0s4pZuqx7x2uYrHrbOqLwLkgpuxezbM="
+                amount="2 units"
+            /></b-col>
         </b-row>
         <br/>
         <b-col>
           <span class="i-title">Instructions</span>
           <div>
-            <div class="small-card">Mix the cream in a mixer</div>
-            <div class="small-card">Add condensed milk and mix a little bit</div>
-            <div class="small-card">Add your desired flavour- we recommend a cup of esspreso!</div>
-            <div class="small-card">Freeze for 4 hours or overnight</div>
-            <div class="small-card">Enjoy your Ice Cream!</div>
+            <div class="small-card">Turn on the oven to 180 degrees</div>
+            <div class="small-card">Melt in a bowl 150 gr of chocolate and the butter</div>
+            <div class="small-card">Add the eggs, egg yolks and sugar to the bowl, and mix</div>
+            <div class="small-card">Add the flour and mix a little bit</div>
+            <div class="small-card">Put the mixture evenly in cupcake cups</div>
+            <div class="small-card">Put a cube of chocolate inside each one</div>
+            <div class="small-card">Bake for 9 minutes</div>
+            <div class="small-card">Enjoy your Suflonim!</div>
           </div>
         </b-col>
       </div>
