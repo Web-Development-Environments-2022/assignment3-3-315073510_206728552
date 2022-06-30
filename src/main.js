@@ -95,7 +95,7 @@ const shared_data = {
     localStorage.setItem("last_searched", last_searched);
     // Vue.$cookie.set("username", '5')
     this.last_searched = last_searched;
-    console.log("login", this.username);
+    console.log("search", this.last_searched);
   },
 };
 console.log(shared_data);
