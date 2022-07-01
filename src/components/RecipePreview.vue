@@ -65,17 +65,28 @@ export default {
         },
   
     },
+    created(){
+      
+      this.updateWatched(this.watchedRecipes)
+  
+    },
      watch: {
     // whenever question changes, this function will run
       watchedRecipes(newVal) {
+    
        let r=JSON.parse(JSON.stringify(this.recipe))
          let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
+         
          try{
+          if(r.rid==undefined){
+            throw new Error()
+          }
           if(arr.includes(r.rid)){
                   this.isWatched=true
                 }
          }
       catch(e){
+     
         if(arr.includes(r.id)){
                   this.isWatched=true
                 }
@@ -85,13 +96,16 @@ export default {
        let r=JSON.parse(JSON.stringify(this.recipe))
          let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
          try{
+          if(r.rid==undefined){
+            throw new Error()
+          }
           if(arr.includes(r.rid)){
-                  this.isWatched=true
+                  this.isFavorit=true
                 }
          }
       catch(e){
         if(arr.includes(r.id)){
-                  this.isWatched=true
+                  this.isFavorit=true
                 }
          }
       }
@@ -103,6 +117,26 @@ export default {
     methods:{
       goToDetails(){
         this.$router.replace(`/recipe/${this.recipe.id?this.recipe.id:this.recipe.rid}?isWatched=${this.isWatched}&isMyRecipe=${this.recipe.id?false:true}`);
+      },
+      updateWatched(newVal){
+               let r=JSON.parse(JSON.stringify(this.recipe))
+               let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
+         debugger
+         
+         try{
+          if(r.rid==undefined){
+            throw new Error()
+          }
+          if(arr.includes(r.rid)){
+                  this.isWatched=true
+                }
+         }
+      catch(e){
+        debugger
+        if(arr.includes(r.id)){
+                  this.isWatched=true
+                }
+         }
       }
     },
     components: { RecipeCategoryGrid, FavoritButton }
