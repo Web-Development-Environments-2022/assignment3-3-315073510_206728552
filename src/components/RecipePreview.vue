@@ -56,87 +56,37 @@ export default {
             required: true
         },
         favoritRecipes: {
-            type: Object,
+            type: Array,
             required: true
         },
         watchedRecipes: {
-            type: Object,
+            type: Array,
             required: true
         },
   
     },
     created(){
-      
-      this.updateWatched(this.watchedRecipes)
+      this.updateWatched(JSON.parse(JSON.stringify(this.watchedRecipes)))
+      this.updateFavorite(JSON.parse(JSON.stringify(this.favoritRecipes)))
   
     },
-     watch: {
-    // whenever question changes, this function will run
-      watchedRecipes(newVal) {
-    
-       let r=JSON.parse(JSON.stringify(this.recipe))
-         let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
-         
-         try{
-          if(r.rid==undefined){
-            throw new Error()
-          }
-          if(arr.includes(r.rid)){
-                  this.isWatched=true
-                }
-         }
-      catch(e){
-     
-        if(arr.includes(r.id)){
-                  this.isWatched=true
-                }
-         }
-      },
-      favoritRecipes(newVal) {
-       let r=JSON.parse(JSON.stringify(this.recipe))
-         let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
-         try{
-          if(r.rid==undefined){
-            throw new Error()
-          }
-          if(arr.includes(r.rid)){
-                  this.isFavorit=true
-                }
-         }
-      catch(e){
-        if(arr.includes(r.id)){
-                  this.isFavorit=true
-                }
-         }
-      }
-       
-
-        
-      }
-  ,
     methods:{
       goToDetails(){
         this.$router.replace(`/recipe/${this.recipe.id?this.recipe.id:this.recipe.rid}?isWatched=${this.isWatched}&isMyRecipe=${this.recipe.id?false:true}`);
       },
-      updateWatched(newVal){
-               let r=JSON.parse(JSON.stringify(this.recipe))
-               let arr=JSON.parse(JSON.stringify(newVal)).map(r=>r.rid)
-         debugger
-         
-         try{
-          if(r.rid==undefined){
-            throw new Error()
+      updateWatched(watched){
+        watched.forEach(recipe=>{
+          if((recipe.id==this.recipe.id && this.recipe.id!=undefined) || (recipe.rid==this.recipe.rid && this.recipe.rid!=undefined)){
+            this.isWatched=true
           }
-          if(arr.includes(r.rid)){
-                  this.isWatched=true
-                }
-         }
-      catch(e){
-        debugger
-        if(arr.includes(r.id)){
-                  this.isWatched=true
-                }
-         }
+        })
+      },
+      updateFavorite(fav){
+        fav.forEach(recipe=>{
+          if((recipe.id==this.recipe.id && this.recipe.id!=undefined) || (recipe.rid==this.recipe.rid && this.recipe.rid!=undefined)){
+            this.isFavorit=true
+          }
+        })
       }
     },
     components: { RecipeCategoryGrid, FavoritButton }

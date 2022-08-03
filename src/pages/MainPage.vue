@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container" >
     {{$cookies.get("username")}}
-    <b-row class="main-content" v-if="this.randomRecipes.length ">
+    <b-row class="main-content" v-if="init">
 
     <b-col >
-      <RecipePreviewList v-if="false"  :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
+      <RecipePreviewList  :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes"  :recipes="randomRecipes" title="Explore this recipes"  />
       <div class="newRandDiv">
         <b-button id="newRandomsBtn" variant="outline-primary" @click="newRandoms">Get New Random Recipes</b-button>
       </div>
@@ -15,7 +15,7 @@
        <RecipePreviewList  :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes" :recipes="lastWatched" title="Last watched recipes" />
     </b-col>
 
-</b-row>
+  </b-row>
     <div v-else id="spinner-div">
         <b-spinner  label="Spinning"></b-spinner>
     </div>
@@ -36,6 +36,7 @@ export default {
      randomRecipes:[],
       lastWatched:[],
       favoritRecipes:[],
+      init:false
     }
   },
   computed:{
@@ -45,12 +46,12 @@ export default {
   },
   async created(){
     //get random recipes
-    api.getRandomRecipes(3).then(recipes=>this.randomRecipes=recipes)
-    // this.randomRecipes=api.stub_recipes
+    this.randomRecipes=await api.getRandomRecipes(3)
     //we need to know which recipes the user visited so we can display the watched icon
     this.lastWatched= await api.getWatched(3)
     //we need to know which recipes the user favorits so we can display the filled star icon
     this.favoritRecipes=await api.getFavoriteRecipes()
+    this.init=true
     },
   methods: { 
     newRandoms(){

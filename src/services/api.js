@@ -58,6 +58,7 @@ export default class api{
     //===========recipe=========
     static async getRandomRecipes(quantity) {
       try {
+        return this.stub_recipes
         const response = await axios.get(
           `http://localhost/recipes/randomRecipes?quantity=${quantity}`,
         );

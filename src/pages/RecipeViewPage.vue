@@ -68,11 +68,8 @@ export default {
             let rid = this.$route.params.recipeId;
             this.isWatched = this.$route.query.isWatched=='true';
             this.isMyRecipe = this.$route.query.isMyRecipe=='true';
-            // send wtch indicator to db
-
-            if(!this.isWatched){
-                console.log(await api.Watch(rid))
-            }
+            // send watch indicator to db
+            await api.Watch(rid)
            
             try {
          
