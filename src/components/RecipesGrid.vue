@@ -44,25 +44,29 @@ export default {
             }
             return res;
         },
-        getEvens(array){
-            let res=[]
-            for (var i = 0; i < array.length; i++) {
-                if(i%2==0){
-                    res.push(array[i])
-                }
-            }
-            return res
-        },
-        getOdds(array){
-            let res=[]
-            for (var i = 0; i < array.length; i++) {
-                if(i%2!=0){
-                    res.push(array[i])
-                }
-            }
-            return res
-        }
+   
+        
 
+    },
+    computed:{
+        evenRecipes(){
+                let res=[]
+                for (var i = 0; i < this.recipes.length; i++) {
+                    if(i%2==0){
+                        res.push(this.recipes[i])
+                    }
+                }
+                return res
+            },
+        oddRecipes(){
+        let res=[]
+        for (var i = 0; i < this.recipes.length; i++) {
+            if(i%2!=0){
+                res.push(this.recipes[i])
+            }
+        }
+        return res
+    }
     },
     components: { RecipePreviewList }
 }
