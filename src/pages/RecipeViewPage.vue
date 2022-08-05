@@ -52,14 +52,11 @@ export default {
     data() {
         return {
             recipe: null,
-            isFavorit:false,
+            isFavorit:Boolean,
             isWatched:Boolean,
             isMyRecipe:Boolean
             
         };
-    },
-    props:{
-      
     },
     async created() {
         try {
@@ -68,6 +65,7 @@ export default {
             let rid = this.$route.params.recipeId;
             this.isWatched = this.$route.query.isWatched=='true';
             this.isMyRecipe = this.$route.query.isMyRecipe=='true';
+            this.isFavorit = this.$route.query.isFavorit=='true';
             // send watch indicator to db
             await api.Watch(rid)
            

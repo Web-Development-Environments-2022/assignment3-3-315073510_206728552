@@ -1,7 +1,7 @@
 <template>
     <div class="star" :style="{'font-size':this.size+'px'}">
-        <b-icon-star  v-if="!isFavorit" @click="favorit"></b-icon-star>
-        <b-icon-star-fill v-else></b-icon-star-fill>
+        <v-btn @click="favorit" v-if="!isFavorit"> <b-icon-star></b-icon-star></v-btn>
+        <v-btn @click="favorit" v-else> <b-icon-star-fill ></b-icon-star-fill></v-btn>
     </div>
 </template>
 
@@ -28,8 +28,9 @@ export default{
     },
     methods:{
         favorit(){
-            api.setFavorit({recipeId:this.recipe.id})
-            this.isFavorit=true
+            this.isFavorit =!this.isFavorit
+            api.setFavorit({recipeId:this.recipe.id,markAs:this.isFavorit})
+            
          
         },
 
