@@ -41,6 +41,10 @@
       </b-row>
       
     </div>
+     <div id="spinner-div" v-else>
+        <b-spinner  label="Spinning"></b-spinner>
+        <span>Loading page, please wait</span>
+      </div>
   </div>
 </template>
 
@@ -60,6 +64,7 @@ export default {
     },
     async created() {
         try {
+         
 
             let response;
             let rid = this.$route.params.recipeId;
@@ -68,9 +73,9 @@ export default {
             this.isFavorit = this.$route.query.isFavorit=='true';
             // send watch indicator to db
             await api.Watch(rid)
-           
+ 
             try {
-         
+
                 //getting detailed recipe
                 response = await api.getRecipe(rid,this.isMyRecipe);
 
@@ -203,5 +208,9 @@ export default {
 
 .quant-txt{
   font-size: 14px;
+}
+#spinner-div{
+  display: flex;
+  justify-content: center;
 }
 </style>

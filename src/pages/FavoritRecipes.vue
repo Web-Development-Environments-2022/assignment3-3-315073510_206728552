@@ -1,10 +1,15 @@
 <template>
   <div class="container">
     <h1 class="title">Favorit Recipes </h1>
-      <RecipesGrid v-if="favoritRecipes.length" :watched="lastWatched" :favorits="favoritRecipes" :recipes="favoritRecipes"></RecipesGrid>
-      <div v-else id="spinner-div">
+      <div v-if="favoritRecipes.length==0" >
+        No favorit recipes yet
+      </div>
+      <div id="spinner-div" v-else-if="favoritRecipes==undefined">
         <b-spinner  label="Spinning"></b-spinner>
       </div>
+      <RecipesGrid v-else-if="favoritRecipes!=undefined" :watched="lastWatched" :favorits="favoritRecipes" :recipes="favoritRecipes"></RecipesGrid>
+      
+      
   </div>
 
 </template>
@@ -19,8 +24,8 @@ export default{
 },
   data(){
     return{
-        lastWatched:[],
-      favoritRecipes:[],
+        lastWatched:Array,
+      favoritRecipes:Array,
     }
   
   },

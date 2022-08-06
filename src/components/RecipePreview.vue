@@ -72,8 +72,7 @@ export default {
     },
     methods:{
       goToDetails(){
-        this.$router.replace(`/recipe/${this.recipe.id?this.recipe.id:this.recipe.rid}?isWatched=${this.isWatched}&isMyRecipe=${this.recipe.id?false:true}
-        &isFavorit=${this.isFavorit}`);
+        this.$router.replace(`/recipe/${this.recipe.id?this.recipe.id:this.recipe.rid}?isWatched=${this.isWatched}&isMyRecipe=${this.recipe.id?false:true}&isFavorit=${this.isFavorit}`);
       },
       updateWatched(watched){
         watched.forEach(recipe=>{
