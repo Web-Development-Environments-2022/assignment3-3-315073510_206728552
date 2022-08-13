@@ -11,8 +11,8 @@
     </b-col>
  
     <b-col>
-      <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
-       <RecipePreviewList  :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes" :recipes="lastWatched" title="Last watched recipes" />
+            <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue Last watched recipes</router-link>
+       <RecipePreviewList v-if="$root.store.username"  :watchedRecipes="lastWatched" :favoritRecipes="favoritRecipes" :recipes="lastWatched" title="Last watched recipes" />
     </b-col>
 
   </b-row>

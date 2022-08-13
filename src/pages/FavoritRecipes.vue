@@ -30,9 +30,9 @@ export default{
   
   },
 
-  created(){
-        api.getWatched().then(r=>this.lastWatched=r)
-     api.getFavoriteRecipes().then(r=>this.favoritRecipes=r)
+  async created(){
+    this.lastWatched=await api.getWatched()
+     this.favoritRecipes=await api.getFavoriteRecipes()
   }
 }
 </script>

@@ -72,7 +72,10 @@ export default {
             this.isMyRecipe = this.$route.query.isMyRecipe=='true';
             this.isFavorit = this.$route.query.isFavorit=='true';
             // send watch indicator to db
-            await api.Watch(rid)
+            if(!this.isWatched){
+              await api.Watch(rid)
+            }
+            
  
             try {
 

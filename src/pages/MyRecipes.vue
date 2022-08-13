@@ -32,10 +32,10 @@ export default{
       randomRecipes:[],
      
   },
-  created(){
-    api.getMyRecipes().then(r=>this.recipes=r)
-    api.getWatched().then(r=>this.lastWatched=r)
-     api.getFavoriteRecipes().then(r=>this.favoritRecipes=r)
+  async created(){
+   this.recipes=await api.getMyRecipes()
+    this.lastWatched=await api.getWatched()
+     this.favoritRecipes=await api.getFavoriteRecipes()
   }
 }
 </script>
